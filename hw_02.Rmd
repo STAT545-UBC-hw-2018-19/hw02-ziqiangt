@@ -83,4 +83,49 @@ table(gapminder$country)
 ```
 
 ## Explore various plot types
+Make a few plots, probably of the same variable you chose to characterize numerically. 
+Let's see the relationship between life expectancy and continent
+```{r}
+PLOT <- ggplot(gapminder, aes(x=continent, y=lifeExp))
+```
 
+1. scatterplot
+```{r}
+  PLOT + geom_point() +
+  ggtitle("Scatter plot of Life Expectancy")
+```
+2. box plot
+```{r}
+ PLOT + geom_boxplot() +
+    ggtitle("Scatter plot of Life Expectancy")
+```
+3. violin plot
+```{r}
+ PLOT + geom_violin() +
+    ggtitle("Scatter plot of Life Expectancy")
+```
+4. overlap geom_violin and jitter plot
+```{r}
+ PLOT + geom_violin() +
+  geom_jitter(alpha = 0.1)
+```
+5. let's see the life expantancy in Americas with popolation more than 50 milion
+```{r}
+ gapminder %>% 
+  filter(continent == "Americas") %>% 
+  filter(pop >= 50000000) %>% 
+  ggplot(aes(year, lifeExp, group = 1)) + 
+  facet_grid(~country) +
+  geom_violin() +
+  geom_jitter(alpha = 0.1)
+```
+6. let's compare lifeExp in Americas and in Asia with popolation more than 50 milion
+```{r}
+ gapminder %>% 
+  filter(continent == "Americas" | continent == "Asia") %>% 
+  filter(pop >= 50000000) %>% 
+  ggplot(aes(year, lifeExp, group = 1)) + 
+  facet_grid(~continent) +
+  geom_violin() +
+  geom_jitter(alpha = 0.1)
+```
