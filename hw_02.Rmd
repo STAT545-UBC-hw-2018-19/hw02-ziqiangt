@@ -41,8 +41,10 @@ Answer: There are 6 colums and 1704 rows.
 ```{r}
 str(gapminder)
 glimpse(gapminder)
+summary(gapminder)
+ls(gapminder)
 ```
-Answer: str function can get these facts, such as classes, objects, variables.  Similarly, glimpse can return the details of dataset while this method tries to show you as much data as possible. 
+Answer: "str"" function can get these facts, such as classes, objects, variables.  Similarly, "glimpse"" can return the details of dataset while this method tries to show you as much data as possible. Another userful function is "summary"", which returns the values such as median, mean, max of the each variable. Function "ls"" is also useful in returning the variables.
 
 6. What data type is each variable?
 Answer: according to results of questions 5, the data of each variable is shown as below:
@@ -53,13 +55,32 @@ $ lifeExp   <dbl>
 $ pop       <int> 
 $ gdpPercap <dbl>
 
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+## Explore individual variables
+1. What are possible values (or range, whichever is appropriate) of each variable?
+```{r}
+## let's make a data frame containing the columns year, pop, continent from the gapminder dat.
+select(gapminder,year,pop, continent) %>% 
+  arrange(year, pop) %>% # Then order by year, then by pop
+  filter(pop > 1000000000 & year >= 2002) # Then fliter the data with population more than 1 billion and year more than 2002
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+2. What values are typical? What’s the spread? What’s the distribution? Etc., tailored to the variable at hand.
+```{r}
+##scale can be viewed use bar chart
+  ggplot(gapminder,aes(x = continent)) + 
+  geom_bar() 
+```
+```{r}
+gapminder %>%
+##distribution can be viewd use summary
+  select(year, pop,continent, lifeExp) %>%
+  summary()
+```
+```{r}
+##The counts for variables for each year are the same (142). This happens in country (12) as well
+table(gapminder$year)
+table(gapminder$country)
+```
+
+## Explore various plot types
+

@@ -182,10 +182,47 @@ library(tidyverse)</code></pre>
 ## $ lifeExp   &lt;dbl&gt; 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.8...
 ## $ pop       &lt;int&gt; 8425333, 9240934, 10267083, 11537966, 13079460, 1488...
 ## $ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 78...</code></pre>
-<p>Answer: str function can get these facts, such as classes, objects, variables. Similarly, glimpse can return the details of dataset while this method tries to show you as much data as possible.</p>
+<pre class="r"><code>summary(gapminder)</code></pre>
+<pre><code>##         country        continent        year         lifeExp     
+##  Afghanistan:  12   Africa  :624   Min.   :1952   Min.   :23.60  
+##  Albania    :  12   Americas:300   1st Qu.:1966   1st Qu.:48.20  
+##  Algeria    :  12   Asia    :396   Median :1980   Median :60.71  
+##  Angola     :  12   Europe  :360   Mean   :1980   Mean   :59.47  
+##  Argentina  :  12   Oceania : 24   3rd Qu.:1993   3rd Qu.:70.85  
+##  Australia  :  12                  Max.   :2007   Max.   :82.60  
+##  (Other)    :1632                                                
+##       pop              gdpPercap       
+##  Min.   :6.001e+04   Min.   :   241.2  
+##  1st Qu.:2.794e+06   1st Qu.:  1202.1  
+##  Median :7.024e+06   Median :  3531.8  
+##  Mean   :2.960e+07   Mean   :  7215.3  
+##  3rd Qu.:1.959e+07   3rd Qu.:  9325.5  
+##  Max.   :1.319e+09   Max.   :113523.1  
+## </code></pre>
+<pre class="r"><code>ls(gapminder)</code></pre>
+<pre><code>## [1] &quot;continent&quot; &quot;country&quot;   &quot;gdpPercap&quot; &quot;lifeExp&quot;   &quot;pop&quot;       &quot;year&quot;</code></pre>
+<p>Answer: “str”&quot; function can get these facts, such as classes, objects, variables. Similarly, “glimpse”&quot; can return the details of dataset while this method tries to show you as much data as possible. Another userful function is “summary”“, which returns the values such as median, mean, max of the each variable. Function”ls“” is also useful in returning the variables.</p>
 <ol start="6" style="list-style-type: decimal">
 <li>What data type is each variable? Answer: according to results of questions 5, the data of each variable is shown as below: $ country <fct> $ continent <fct> $ year <int> $ lifeExp <dbl> $ pop <int> $ gdpPercap <dbl></li>
 </ol>
+</div>
+<div id="explore-individual-variables" class="section level2">
+<h2>Explore individual variables</h2>
+<ol style="list-style-type: decimal">
+<li>What are possible values (or range, whichever is appropriate) of each variable?</li>
+</ol>
+<pre class="r"><code>## let's make a data frame containing the columns year, pop, continent from the gapminder dat.
+select(gapminder,year,pop, continent) %&gt;% 
+  arrange(year, pop) %&gt;% # Then order by year, then by pop
+  filter(pop &gt; 1000000000 &amp; year &gt;= 2002) # Then fliter the data with population more than 1 billion and year more than 2002</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##    year        pop continent
+##   &lt;int&gt;      &lt;int&gt; &lt;fct&gt;    
+## 1  2002 1034172547 Asia     
+## 2  2002 1280400000 Asia     
+## 3  2007 1110396331 Asia     
+## 4  2007 1318683096 Asia</code></pre>
+<p>What values are typical? What’s the spread? What’s the distribution? Etc., tailored to the variable at hand.</p>
 </div>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>
