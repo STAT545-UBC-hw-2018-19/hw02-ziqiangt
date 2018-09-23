@@ -61,7 +61,8 @@ $ gdpPercap <dbl>
 ## let's make a data frame containing the columns year, pop, continent from the gapminder dat.
 select(gapminder,year,pop, continent) %>% 
   arrange(year, pop) %>% # Then order by year, then by pop
-  filter(pop > 1000000000 & year >= 2002) # Then fliter the data with population more than 1 billion and year more than 2002
+  filter(pop > 1000000000 & year >= 2002) %>% # Then fliter the data with population more than 1 billion and year more than 2002
+  knitr::kable()
 ```
 
 2. What values are typical? What’s the spread? What’s the distribution? Etc., tailored to the variable at hand.
@@ -74,12 +75,15 @@ select(gapminder,year,pop, continent) %>%
 gapminder %>%
 ##distribution can be viewd use summary
   select(year, pop,continent, lifeExp) %>%
-  summary()
+  summary() %>% 
+  knitr::kable()
 ```
 ```{r}
 ##The counts for variables for each year are the same (142). This happens in country (12) as well
-table(gapminder$year)
-table(gapminder$country)
+table(gapminder$year) %>% 
+  knitr::kable()
+table(gapminder$country) %>% 
+  knitr::kable()
 ```
 
 ## Explore various plot types
@@ -119,6 +123,7 @@ PLOT <- ggplot(gapminder, aes(x=continent, y=lifeExp))
   geom_violin() +
   geom_jitter(alpha = 0.1)
 ```
+
 6. let's compare lifeExp in Americas and in Asia with popolation more than 50 milion
 ```{r}
  gapminder %>% 
@@ -129,3 +134,17 @@ PLOT <- ggplot(gapminder, aes(x=continent, y=lifeExp))
   geom_violin() +
   geom_jitter(alpha = 0.1)
 ```
+
+## But I want to do more!
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan")) %>% 
+knitr::kable()
+```
+Answer: the c("Rwanda", "Afghanistan") dose not return "Rwanda" | "Afghanistan". Therefore, the logical algiritem is not [country == "Rwanda" | country == "Afghanistan"].
+
+One possible solution is given by:
+```{r}
+  filter(gapminder, country == "Rwanda" | country == "Afghanistan") %>%
+  knitr::kable()
+```
+
