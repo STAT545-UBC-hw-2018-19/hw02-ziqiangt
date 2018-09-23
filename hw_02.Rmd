@@ -1,0 +1,65 @@
+---
+title: "hw_02"
+output: 
+  html_document:
+    keep_md: true
+editor_options: 
+  chunk_output_type: inline
+---
+
+## Overview
+
+The goal is to explore a dataset. In particular, to begin to establish a workflow for data frames or “tibbles”. This homework will use dplyr and ggplot2 to do some description and visualization.
+
+## library the data set
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+
+## Explore the gapminder object:
+1. Is it a data.frame, a matrix, a vector, a list?
+```{r}
+class(gapminder)
+```
+Answer: The object of gapminder is a "data.frame". 
+
+2. What is its class?
+```{r}
+class(gapminder)
+```
+Answer: The class of gapminder is a "tbl_df". 
+
+3,4. How many variables/columns and rows/observations?
+```{r}
+ncol(gapminder)
+nrow(gapminder)
+```
+Answer: There are 6 colums and 1704 rows. 
+
+5. Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?
+```{r}
+str(gapminder)
+glimpse(gapminder)
+```
+Answer: str function can get these facts, such as classes, objects, variables.  Similarly, glimpse can return the details of dataset while this method tries to show you as much data as possible. 
+
+6. What data type is each variable?
+Answer: according to results of questions 5, the data of each variable is shown as below:
+$ country   <fct> 
+$ continent <fct> 
+$ year      <int> 
+$ lifeExp   <dbl> 
+$ pop       <int> 
+$ gdpPercap <dbl>
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
